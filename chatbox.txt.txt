@@ -1,0 +1,64 @@
+import re
+import random
+
+greeting_response = ["hi", "hello", "hey"]
+goodbye_response = ["bye", "talk to you later"]
+thank_response = ['happy to help', "don't mention it", 'my pleasure']
+inquiry_response = ["I'm doing okay", 'okay', "I've been better"]
+future_response = ['yes', 'no', 'maybe']
+what_you_response = ['nothing', 'not much']
+are_you_response = ['yes', 'no', 'maybe']
+when_response = ['soon', 'not now']
+no_response = ['[No Suggestion]']
+
+def bot_response(user_input):
+    
+
+    
+    if re.match('hi|hi\s+there|hello|hey|good\s+[morning|afternoon|evening|day]', user_input):  # greeting
+        return random.choice(greeting_response)
+
+    
+    elif re.match('goodbye|bye|see\s+ya|gotta\s+go', user_input):
+        return random.choice(goodbye_response)
+
+    
+    elif re.match('how\s+are\s+you.*|how.*going', user_input):
+        return random.choice(inquiry_response)
+
+    
+    elif re.match('thank', user_input):
+        return random.choice(thank_response)
+
+    
+    elif re.search('[will|can|would|do]\s+you', user_input):
+        return random.choice(future_response)
+
+    
+    elif re.match('are.*you', user_input):
+        return random.choice(are_you_response)
+
+    
+    elif re.match('when.*you', user_input):
+        return random.choice(when_response)
+
+    
+    elif re.match('sup|what.*[happening|up|you]', user_input):
+        return random.choice(what_you_response)
+
+    else:  
+        return random.choice(no_response)
+
+print("* Hello! Type in a message and I will suggest some replies! If you'd like to exit please type quit! ")
+
+flag = True
+
+while flag:
+    user_input = input('>>> ').lower()  
+
+    if not re.search('quit', user_input):
+        response = bot_response(user_input)
+        print('* ' + response)
+    else:
+        flag = False
+        print("> Bye now!")
